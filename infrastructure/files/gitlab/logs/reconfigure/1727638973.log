@@ -1,0 +1,89 @@
+# Logfile created on 2024-09-29 19:42:53 +0000 by logger.rb/v1.5.3
+[2024-09-29T19:42:53+00:00] INFO: Started Cinc Zero at chefzero://localhost:1 with repository at /opt/gitlab/embedded (One version per cookbook)
+[2024-09-29T19:42:53+00:00] INFO: *** Cinc Client 18.3.0 ***
+[2024-09-29T19:42:53+00:00] INFO: Platform: aarch64-linux
+[2024-09-29T19:42:53+00:00] INFO: Cinc-client pid: 33
+[2024-09-29T19:42:53+00:00] INFO: Setting the run_list to ["recipe[gitlab]"] from CLI options
+[2024-09-29T19:42:53+00:00] INFO: Run List is [recipe[gitlab]]
+[2024-09-29T19:42:53+00:00] INFO: Run List expands to [gitlab]
+[2024-09-29T19:42:53+00:00] INFO: Starting Cinc Client Run for gitlab.local
+[2024-09-29T19:42:53+00:00] INFO: Running start handlers
+[2024-09-29T19:42:53+00:00] INFO: Start handlers complete.
+[2024-09-29T19:42:54+00:00] INFO: Loading cookbooks [gitlab@0.0.1, package@0.1.0, logrotate@0.1.0, postgresql@0.1.0, redis@0.1.0, monitoring@0.1.0, registry@0.1.0, mattermost@0.1.0, consul@0.1.0, gitaly@0.1.0, praefect@0.1.0, gitlab-kas@0.1.0, gitlab-pages@0.1.0, letsencrypt@0.1.0, nginx@0.1.0, runit@5.1.7, acme@4.1.6, crond@0.1.0]
+[2024-09-29T19:42:55+00:00] INFO: Generating default secrets
+[2024-09-29T19:42:58+00:00] INFO: Generating /etc/gitlab/gitlab-secrets.json file
+[2024-09-29T19:42:58+00:00] WARN: gitlab-rails does not have a log_group or default logdir mode defined. Setting to 0700.
+[2024-09-29T19:42:58+00:00] INFO: Skipped selecting an init system because it was explicitly disabled
+[2024-09-29T19:42:58+00:00] WARN: gitlab-shell does not have a log_group or default logdir mode defined. Setting to 0700.
+[2024-09-29T19:42:58+00:00] WARN: gitlab-sshd does not have a log_group or default logdir mode defined. Setting to 0700.
+[2024-09-29T19:42:58+00:00] WARN: logrotate does not have a log_group or default logdir mode defined. Setting to 0700.
+[2024-09-29T19:42:58+00:00] WARN: logrotate does not have a log_group or default logdir mode defined. Setting to 0700.
+[2024-09-29T19:42:58+00:00] WARN: puma does not have a log_group or default logdir mode defined. Setting to 0700.
+[2024-09-29T19:42:58+00:00] WARN: gitlab-rails does not have a log_group or default logdir mode defined. Setting to 0700.
+[2024-09-29T19:42:58+00:00] WARN: gitlab-shell does not have a log_group or default logdir mode defined. Setting to 0700.
+[2024-09-29T19:42:58+00:00] WARN: gitlab-workhorse does not have a log_group or default logdir mode defined. Setting to 0700.
+[2024-09-29T19:42:58+00:00] WARN: gitlab-pages does not have a log_group or default logdir mode defined. Setting to 0700.
+[2024-09-29T19:42:58+00:00] WARN: gitlab-kas does not have a log_group or default logdir mode defined. Setting to 0700.
+[2024-09-29T19:42:58+00:00] WARN: gitaly does not have a log_group or default logdir mode defined. Setting to 0700.
+[2024-09-29T19:42:58+00:00] WARN: mailroom does not have a log_group or default logdir mode defined. Setting to 0700.
+[2024-09-29T19:42:58+00:00] WARN: gitaly does not have a log_group or default logdir mode defined. Setting to 0700.
+[2024-09-29T19:42:58+00:00] WARN: postgresql does not have a log_group or default logdir mode defined. Setting to 0700.
+[2024-09-29T19:42:58+00:00] WARN: postgresql does not have a log_group or default logdir mode defined. Setting to 0700.
+[2024-09-29T19:42:58+00:00] WARN: gitlab-kas does not have a log_group or default logdir mode defined. Setting to 0700.
+[2024-09-29T19:42:58+00:00] WARN: puma does not have a log_group or default logdir mode defined. Setting to 0700.
+[2024-09-29T19:42:58+00:00] WARN: sidekiq does not have a log_group or default logdir mode defined. Setting to 0700.
+[2024-09-29T19:42:58+00:00] WARN: gitlab-workhorse does not have a log_group or default logdir mode defined. Setting to 0700.
+[2024-09-29T19:42:58+00:00] WARN: registry does not have a log_group or default logdir mode defined. Setting to 0700.
+[2024-09-29T19:42:58+00:00] WARN: gitlab-exporter does not have a log_group or default logdir mode defined. Setting to 0700.
+[2024-09-29T19:42:58+00:00] WARN: redis-exporter does not have a log_group or default logdir mode defined. Setting to 0700.
+[2024-09-29T19:42:58+00:00] WARN: prometheus does not have a log_group or default logdir mode defined. Setting to 0700.
+[2024-09-29T19:42:58+00:00] WARN: alertmanager does not have a log_group or default logdir mode defined. Setting to 0700.
+[2024-09-29T19:42:58+00:00] WARN: postgres-exporter does not have a log_group or default logdir mode defined. Setting to 0700.
+[2024-09-29T19:42:59+00:00] WARN: only_if block for file[/var/opt/gitlab/gitlab-rails/etc/gitlab-registry.key] returned a string, did you mean to run a command?
+[2024-09-29T19:42:59+00:00] WARN: only_if block for templatesymlink[Create a gitlab_pages_secret and create a symlink to Rails root] returned a string, did you mean to run a command?
+[2024-09-29T19:42:59+00:00] WARN: only_if block for templatesymlink[Create a gitlab_kas_secret and create a symlink to Rails root] returned a string, did you mean to run a command?
+[2024-09-29T19:42:59+00:00] INFO: link[/opt/gitlab/service/logrotate] created
+[2024-09-29T19:43:00+00:00] INFO: Retrying execution of execute[/opt/gitlab/bin/gitlab-ctl start logrotate], 19 attempts left
+[2024-09-29T19:43:03+00:00] INFO: execute[/opt/gitlab/bin/gitlab-ctl start logrotate] ran successfully
+[2024-09-29T19:43:03+00:00] WARN: redis does not have a log_group or default logdir mode defined. Setting to 0700.
+[2024-09-29T19:43:03+00:00] INFO: link[/opt/gitlab/service/redis] created
+[2024-09-29T19:43:04+00:00] INFO: Retrying execution of execute[/opt/gitlab/bin/gitlab-ctl start redis], 19 attempts left
+[2024-09-29T19:43:07+00:00] INFO: Retrying execution of execute[/opt/gitlab/bin/gitlab-ctl start redis], 18 attempts left
+[2024-09-29T19:43:09+00:00] INFO: execute[/opt/gitlab/bin/gitlab-ctl start redis] ran successfully
+[2024-09-29T19:43:09+00:00] INFO: link[/opt/gitlab/service/gitaly] created
+[2024-09-29T19:43:10+00:00] INFO: Retrying execution of execute[/opt/gitlab/bin/gitlab-ctl start gitaly], 19 attempts left
+[2024-09-29T19:43:13+00:00] INFO: Retrying execution of execute[/opt/gitlab/bin/gitlab-ctl start gitaly], 18 attempts left
+[2024-09-29T19:43:16+00:00] INFO: execute[/opt/gitlab/bin/gitlab-ctl start gitaly] ran successfully
+[2024-09-29T19:43:18+00:00] INFO: link[/opt/gitlab/service/postgresql] created
+[2024-09-29T19:43:18+00:00] INFO: file[/opt/gitlab/service/postgresql/supervise/status] owner changed to 996
+[2024-09-29T19:43:18+00:00] INFO: file[/opt/gitlab/service/postgresql/supervise/status] group changed to 996
+[2024-09-29T19:43:18+00:00] INFO: file[/opt/gitlab/service/postgresql/supervise/status] updated atime and mtime to 2024-09-29 19:43:18 +0000
+[2024-09-29T19:43:18+00:00] INFO: file[/opt/gitlab/service/postgresql/log/supervise/status] owner changed to 996
+[2024-09-29T19:43:18+00:00] INFO: file[/opt/gitlab/service/postgresql/log/supervise/status] group changed to 996
+[2024-09-29T19:43:18+00:00] INFO: file[/opt/gitlab/service/postgresql/log/supervise/status] updated atime and mtime to 2024-09-29 19:43:18 +0000
+[2024-09-29T19:43:19+00:00] INFO: Retrying execution of execute[/opt/gitlab/bin/gitlab-ctl start postgresql], 19 attempts left
+[2024-09-29T19:43:21+00:00] INFO: execute[/opt/gitlab/bin/gitlab-ctl start postgresql] ran successfully
+[2024-09-29T19:43:22+00:00] INFO: link[/opt/gitlab/service/gitlab-kas] created
+[2024-09-29T19:43:22+00:00] WARN: gitlab-rails does not have a log_group or default logdir mode defined. Setting to 0700.
+[2024-09-29T19:43:46+00:00] INFO: Running queued delayed notifications before re-raising exception
+[2024-09-29T19:43:46+00:00] ERROR: Running exception handlers
+[2024-09-29T19:43:46+00:00] ERROR: Exception handlers complete
+[2024-09-29T19:43:46+00:00] FATAL: Stacktrace dumped to /opt/gitlab/embedded/cookbooks/cache/cinc-stacktrace.out
+[2024-09-29T19:43:46+00:00] FATAL: ---------------------------------------------------------------------------------------
+[2024-09-29T19:43:46+00:00] FATAL: PLEASE PROVIDE THE CONTENTS OF THE stacktrace.out FILE (above) IF YOU FILE A BUG REPORT
+[2024-09-29T19:43:46+00:00] FATAL: ---------------------------------------------------------------------------------------
+[2024-09-29T19:43:46+00:00] FATAL: Mixlib::ShellOut::ShellCommandFailed: rails_migration[gitlab-rails] (gitlab::database_migrations line 51) had an error: Mixlib::ShellOut::ShellCommandFailed: bash_hide_env[migrate gitlab-rails database] (gitlab::database_migrations line 20) had an error: Mixlib::ShellOut::ShellCommandFailed: Expected process to exit with [0], but received '1'
+---- Begin output of "bash"  ----
+STDOUT: rake aborted!
+ArgumentError: Invalid Timezone: Germany/Berlin
+/opt/gitlab/embedded/service/gitlab-rails/config/initializers/time_zone.rb:3:in `<top (required)>'
+/opt/gitlab/embedded/service/gitlab-rails/config/environment.rb:7:in `<top (required)>'
+<internal:/opt/gitlab/embedded/lib/ruby/site_ruby/3.1.0/rubygems/core_ext/kernel_require.rb>:37:in `require'
+<internal:/opt/gitlab/embedded/lib/ruby/site_ruby/3.1.0/rubygems/core_ext/kernel_require.rb>:37:in `require'
+/opt/gitlab/embedded/bin/bundle:25:in `load'
+/opt/gitlab/embedded/bin/bundle:25:in `<main>'
+Tasks: TOP => gitlab:db:configure => environment
+(See full trace by running task with --trace)
+STDERR: 
+---- End output of "bash"  ----
+Ran "bash"  returned 1

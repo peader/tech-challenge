@@ -1,0 +1,5 @@
+apiVersion: v2
+name: moose-facts
+description: Helm chart for Moose Facts environment
+version: 1.0.0
+type: application

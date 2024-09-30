@@ -1,0 +1,107 @@
+---
+- name: Install prerequisites on control-node
+  hosts: localhost
+  connection: local 
+  become: yes
+
+  tasks:
+  - name: Install dependencies for python packages
+    ansible.builtin.apt:
+      name: "{{ item }}"
+      state: present
+    loop:
+      - libffi-dev
+      - libssl-dev
+      - python3-dev
+  
+  - name: Install python and pip
+    ansible.builtin.apt:
+      name: "{{ item }}"
+      state: present
+    loop:
+      - python3
+      - python3-pip
+
+  - name: Install docker
+    ansible.builtin.apt:
+      name: docker.io
+      state: present
+  
+  - name: Create docker group
+    ansible.builtin.group:
+      name: docker
+      state: present
+
+  - name: get the username running the deploy
+    become: false
+    local_action: command whoami
+    register: username_on_the_host
+
+  - name: Add user to docker group
+    ansible.builtin.shell: "sudo usermod -aG docker {{ username_on_the_host.stdout }}"
+
+  - name: force reeavluation of group memberships #this may not work so a reboot of the machine may be necessary
+    ansible.builtin.shell: "newgrp docker"
+
+  - name: Install docker-compose
+    ansible.builtin.apt:
+      name: docker-compose
+      state: present
+
+  - name: Install git
+    ansible.builtin.apt:
+      name: git
+      state: present
+
+  - name: Download and install act
+    ansible.builtin.unarchive:
+      src: https://github.com/nektos/act/releases/download/v0.2.67/act_Linux_arm64.tar.gz
+      dest: /usr/local/bin
+      remote_src: yes
+      mode: '0755'
+
+  - name: Set cgroup settings in the cmdline.txt file
+    ansible.builtin.replace:
+      path: /boot/firmware/cmdline.txt
+      regexp: '^([\w](?!.*\b{{ item }}\b).*)$'
+      replace: '\1 {{ item }}'
+    with_items:
+    - "cgroup_enable=cpuset"
+    - "cgroup_memory=1"
+    - "cgroup_enable=memory"
+
+  - name: Download and install k3s
+    ansible.builtin.shell: "curl -sfL https://get.k3s.io | sh -"
+
+  - name: change the k3s.yml file permission to allow access to the cli without sudo
+    ansible.builtin.file:
+      path: /etc/rancher/k3s/k3s.yaml
+      mode: '0644'
+  - name: add the alias k for kubectl to the .bashrc file
+    ansible.builtin.lineinfile:
+      path: /home/{{ username_on_the_host.stdout }}/.bashrc
+      line: 'alias k="kubectl"'
+
+  - name: Run the local docker registry
+    docker_container:
+      name: registry
+      image: registry:2
+      ports:
+        - "8000:5000"
+      restart: true
+      state: started
+
+  - name: Install helm
+    ansible.builtin.unarchive:
+      src: https://get.helm.sh/helm-v3.16.1-linux-arm64.tar.gz
+      dest: /tmp
+      remote_src: yes
+      mode: '0755'
+
+  - name: move the helm binary to /usr/local/bin/helm
+    ansible.builtin.shell: "mv /tmp/linux-arm64/helm /usr/local/bin/helm"
+
+  - name: make the k3s config the default kubectl config
+    ansible.builtin.lineinfile:
+      path: /etc/profile
+      line: 'export KUBECONFIG=/etc/rancher/k3s/k3s.yaml'
