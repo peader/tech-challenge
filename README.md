@@ -37,6 +37,7 @@ The host name of the system is control-node. (Used to connect to the cluster fro
 
 ## Making changes
 - Simply change either the application/backend/server.py file, for example add a new endpoint or modify and existing endpoint or modify the html file at application/frontend/index.html.
+- Commit the changes (needed for updating the image reviosion).
 - Run the commands:
     ``` bash
     act --job docker --secret-file=secrets/my-custom.secrets
