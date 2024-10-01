@@ -11,7 +11,16 @@ moose_facts = [
     "Moose have long legs and can run fast.",
     "Moose are herbivores and eat plants, fruits, and vegetation.",
     "Moose are solitary animals and only come together during mating season.",
-    "Moose are one of the most intelligent animals in the world."
+    "Moose are one of the most intelligent animals in the world.",
+    "Moose are twice the size of elk",
+    "Moose have special noses that allows it to find water across large ranges",
+    "They’re the largest deer!",
+    "They can be the most dangerous animals around",
+    "They have a prehensile upper lip",
+    "They can run, really, really fast",
+    "Moose have ‘dewlaps’ (a hanging fold of skin from their neck)",
+    "They can swim",
+    "Males shed their antlers"
 ]
 
 import random
