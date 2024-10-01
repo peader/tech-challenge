@@ -1,0 +1,101 @@
+name: CI
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout the repo
+        uses: actions/checkout@v3
+
+      - name: Declare the github short sha (used for the image versioning)
+        shell: bash
+        run: |
+          echo "sha_short=$(git rev-parse --short "$GITHUB_SHA")" >> "$GITHUB_ENV"
+
+      - name: Print the short sha to the console
+        run: |
+          echo "Sha: ${{ env.sha_short }}"
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          driver-opts: network=host
+      
+      - name: Build and push backend to local registry
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          tags: localhost:8000/moose-facts-backend:${{ env.sha_short }}
+          context: application/backend
+
+      - name: Build and push frontend local registry
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          tags: localhost:8000/front-end:${{ env.sha_short }}
+          context: application/frontend
+
+  deployment-dev:
+    runs-on: 'ubuntu-latest'
+    steps:
+    - name: checkout the repo
+      uses: actions/checkout@v3
+
+    - name: 'Deploy'
+      uses: 'deliverybot/helm@v1'
+      with:
+        release: 'moose-facts-dev'
+        namespace: 'default'
+        chart: 'deployment/moose-facts'
+        values: |
+          environment: dev
+          port: 30008
+      env:
+        BASE_URL: 'https://get.helm.sh'
+        HELM_2_FILE: 'helm-v3.16.1-linux-arm64.tar.gz'
+        KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'
+
+  deployment-stg:
+    runs-on: 'ubuntu-latest'
+    steps:
+    - name: checkout the repo
+      uses: actions/checkout@v3
+
+    - name: 'Deploy'
+      uses: 'deliverybot/helm@v1'
+      with:
+        release: 'moose-facts-stg'
+        namespace: 'default'
+        chart: 'deployment/moose-facts'
+        values: |
+          environment: stg
+          port: 30009
+      env:
+        KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'
+
+  deployment-prod:
+    runs-on: 'ubuntu-latest'
+    steps:
+    - name: checkout the repo
+      uses: actions/checkout@v3
+
+    - name: 'Deploy'
+      uses: 'deliverybot/helm@v1'
+      with:
+        release: 'moose-facts-prod'
+        namespace: 'default'
+        chart: 'deployment/moose-facts'
+        values: |
+          environment: prod
+          port: 30010
+      env:
+        KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'
+      
