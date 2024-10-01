@@ -1,5 +1,5 @@
 ---
-- name: Install prerequisites on control-node
+- name: Install prerequisites on host machine
   hosts: localhost
   connection: local 
   become: yes
@@ -105,3 +105,15 @@
     ansible.builtin.lineinfile:
       path: /etc/profile
       line: 'export KUBECONFIG=/etc/rancher/k3s/k3s.yaml'
+
+  - name: Run the uptime-kuma container
+    docker_container:
+      name: uptime-kuma
+      image: louislam/uptime-kuma:1
+      ports:
+        - "3001:3001"
+      restart: yes
+      restart_policy: always
+      volumes:
+        - "uptime-kuma:/app/data"
+      state: started
