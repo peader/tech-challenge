@@ -16,6 +16,14 @@
       font-size: 1.5em;
       color: #666;
     }
+  
+    #image-version {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      font-style: italic;
+      color: #666;
+    }
   </style>
   <title>Moose Facts</title>
 </head>
@@ -23,11 +31,18 @@
   <h1>Random Moose Fact</h1>
   <p id="moose-fact"></p>
 
+  <p id="image-version"></p>
+
   <script>
     fetch('/random-moose-fact')
       .then(response => response.json())
       .then(data => {
         document.getElementById('moose-fact').innerHTML = data;
+      });
+    fetch('/image-version')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('image-version').innerHTML = data;
       });
   </script>
 </body>

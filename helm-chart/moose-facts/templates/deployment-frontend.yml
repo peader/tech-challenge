@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-{{ .Values.environment }}
+spec:
+  selector:
+    matchLabels:
+      app: frontend-{{ .Values.environment }}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: frontend-{{ .Values.environment }}
+    spec:
+      containers:
+      - name: frontend
+        image: localhost:8000/front-end:{{ .Values.frontendImageVersion}}
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+            - name: nginx-conf
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+              readOnly: true
+      volumes:
+      - name: nginx-conf
+        configMap:
+          name: nginx-{{ .Values.environment }}-conf
+          items:
+            - key: nginx.conf
+              path: nginx.conf
