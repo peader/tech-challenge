@@ -49,13 +49,20 @@ jobs:
     - name: checkout the repo
       uses: actions/checkout@v3
 
+    - name: Declare the github short sha (used for the image versioning)
+      shell: bash
+      run: |
+        echo "sha_short=$(git rev-parse --short "$GITHUB_SHA")" >> "$GITHUB_ENV"
+
     - name: 'Deploy'
       uses: './actions/helm'
       with:
         release: 'moose-facts-dev'
         namespace: 'default'
-        chart: 'deployment/moose-facts'
+        chart: 'helm-chart/moose-facts'
         values: |
+          frontendImageVersion: ${{ env.sha_short }}
+          backendImageVersion: ${{ env.sha_short }}
           environment: dev
           port: 30008
       env:
@@ -69,13 +76,20 @@ jobs:
     - name: checkout the repo
       uses: actions/checkout@v3
 
+    - name: Declare the github short sha (used for the image versioning)
+      shell: bash
+      run: |
+        echo "sha_short=$(git rev-parse --short "$GITHUB_SHA")" >> "$GITHUB_ENV"
+
     - name: 'Deploy'
       uses: './actions/helm'
       with:
         release: 'moose-facts-stg'
         namespace: 'default'
-        chart: 'deployment/moose-facts'
+        chart: 'helm-chart/moose-facts'
         values: |
+          frontendImageVersion: ${{ env.sha_short }}
+          backendImageVersion: ${{ env.sha_short }}
           environment: stg
           port: 30009
       env:
@@ -87,13 +101,20 @@ jobs:
     - name: checkout the repo
       uses: actions/checkout@v3
 
+    - name: Declare the github short sha (used for the image versioning)
+      shell: bash
+      run: |
+        echo "sha_short=$(git rev-parse --short "$GITHUB_SHA")" >> "$GITHUB_ENV"
+
     - name: 'Deploy'
       uses: './actions/helm'
       with:
         release: 'moose-facts-prod'
         namespace: 'default'
-        chart: 'deployment/moose-facts'
+        chart: 'helm-chart/moose-facts'
         values: |
+          frontendImageVersion: ${{ env.sha_short }}
+          backendImageVersion: ${{ env.sha_short }}
           environment: prod
           port: 30010
       env:

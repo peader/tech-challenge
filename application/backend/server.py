@@ -25,7 +25,7 @@ def get_moose_facts():
 
 @app.route("/image-version", methods=["GET"])
 def get_image_version():
-    return jsonify(os.environ['image_version'])
+    return os.environ['image_version']
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)

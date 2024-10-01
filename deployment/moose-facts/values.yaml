@@ -1,4 +1,0 @@
-environment: dev
-frontendImageVersion: latest
-backendImageVersion: latest
-port: 30008
