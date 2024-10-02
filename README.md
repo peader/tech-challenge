@@ -3,6 +3,49 @@ This repo attempts to setup a kubernetes cluster, deploy an application comprise
 
 Everything runs locally on the host machine.
 
+## Arcithecture
+### Dataflow
+``` mermaid
+graph LR
+    classDef Env fill:#f9f,stroke:#333,stroke-width:4px;
+    classDef App fill:#ccf,stroke:#f66,stroke-width:4px;
+    classDef Service fill:#fcc,stroke:#966,stroke-width:4px;
+
+    dev[Env;dev]
+    stg[Env;stg]
+    prod[Env;prod]
+
+    frontend[App;frontend]
+    backend[App;backend]
+
+    frontend -->|requests|> nginx[Service;nginx]
+    nginx -->|proxy|> backend
+
+    dev -->|http://control-node:30008|> frontend
+    stg -->|http://control-node:30009|> frontend
+    prod -->|http://control-node:30010|> frontend
+```
+
+### Deployment flow
+``` mermaid
+graph LR
+    classDef Step fill:#f9f,stroke:#333,stroke-width:4px;
+    classDef Action fill:#ccf,stroke:#f66,stroke-width:4px;
+
+    A[Create Docker Images] -->|with unique version|> B[Push to Local Registry]
+    B -->|update helm chart|> C[Deploy Helm Chart]
+    C -->|with updated docker version|> D[Moose Facts Application]
+
+    A[Create Docker Images] -->|create frontend image|> E[Frontend Image]
+    A[Create Docker Images] -->|create backend image|> F[Backend Image]
+
+    E -->|push to registry|> B[Push to Local Registry]
+    F -->|push to registry|> B[Push to Local Registry]
+
+    C -->|deploy|> G[Local Kubernetes Cluster]
+    G -->|run|> D[Moose Facts Application]
+```
+
 ## Hardware
 The environment is designed for use on a raspberry pi 5 running the raspbian lite arm64 OS.
 The host name of the system is control-node. (Used to connect to the cluster from outside the hosts local network)
