@@ -56,6 +56,7 @@ The host name of the system is control-node. (Used to connect to the cluster fro
 ## Usage
 - Fork the [tech-challenge](https://github.com/peader/tech-challenge) repo.
 - Run the setup_environment.sh script at the root of the repo.
+- It will fail the first time when trying to install the k3s software (this is because the cgroup settings need to be read at machine startup to take effect). Restart the host and run again.
 - Follow the manual instructions that are printed to the terminal.
     - 1. Copy the content of /etc/rancher/k3s/k3s.yaml
     - 2. Replace the <your-kube-config> string in the secrets/my-custom.secrets file with the copied content
