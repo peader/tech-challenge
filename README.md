@@ -1,3 +1,4 @@
+![Moose Facts](images/moose-facts-screen-grab.JPG?raw=true "Moose Facts")
 ## Description
 This repo attempts to setup a kubernetes cluster, deploy an application comprised of a backend (python flask) and frontend (nginx) service to said cluster using a combination of continuous integration, helm and githubt actions.
 
