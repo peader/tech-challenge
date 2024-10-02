@@ -1,10 +1,10 @@
 ![Moose Facts](images/moose-facts-screen-grab.JPG?raw=true "Moose Facts")
 ## Description
-This repo attempts to setup a kubernetes cluster, deploy an application comprised of a backend (python flask) and frontend (nginx) service to said cluster using a combination of continuous integration, helm and githubt actions.
+This repo attempts to setup a kubernetes cluster, deploy an application comprised of a backend (python flask) and frontend (nginx) service to said cluster using a combination of CI, helm and github actions.
 
 Everything runs locally on the host machine.
 
-## Arcithecture
+## Architecture
 ### Dataflow
 ``` mermaid
 flowchart LR
@@ -82,8 +82,8 @@ The host name of the system is control-node. (Used to connect to the cluster fro
     - http://control-node:30010
 
 ## Making changes
-- Simply change either the application/backend/server.py file, for example add a new endpoint or modify and existing endpoint or modify the html file at application/frontend/index.html.
-- Commit the changes (needed for updating the image reviosion).
+- Simply change either the application/backend/server.py file, for example add a new endpoint or modify an existing endpoint, or modify the html file at application/frontend/index.html.
+- Commit the changes (needed for updating the image revision).
 - Run the commands:
     ``` bash
     act --job docker --secret-file=secrets/my-custom.secrets
