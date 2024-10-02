@@ -6,7 +6,7 @@ Everything runs locally on the host machine.
 ## Arcithecture
 ### Dataflow
 ``` mermaid
-graph LR
+flowchart LR
     classDef Env fill:#f9f,stroke:#333,stroke-width:4px;
     classDef App fill:#ccf,stroke:#f66,stroke-width:4px;
     classDef Service fill:#fcc,stroke:#966,stroke-width:4px;
@@ -18,32 +18,34 @@ graph LR
     frontend[App;frontend]
     backend[App;backend]
 
-    frontend -->|requests|> nginx[Service;nginx]
-    nginx -->|proxy|> backend
+    nginx[Service;nginx]
 
-    dev -->|http://control-node:30008|> frontend
-    stg -->|http://control-node:30009|> frontend
-    prod -->|http://control-node:30010|> frontend
+    dev -->|port 30008| frontend
+    stg -->|port 30009| frontend
+    prod -->|port 30010| frontend
+
+    frontend -->|requests| nginx
+    nginx -->|proxy| backend
 ```
 
 ### Deployment flow
 ``` mermaid
-graph LR
+flowchart LR
     classDef Step fill:#f9f,stroke:#333,stroke-width:4px;
     classDef Action fill:#ccf,stroke:#f66,stroke-width:4px;
 
-    A[Create Docker Images] -->|with unique version|> B[Push to Local Registry]
-    B -->|update helm chart|> C[Deploy Helm Chart]
-    C -->|with updated docker version|> D[Moose Facts Application]
+    A[Create Docker Images] -->|with unique version| B[Push to Local Registry]
+    B -->|update helm chart| C[Deploy Helm Chart]
+    C -->|with updated docker version| D[Moose Facts Application]
 
-    A[Create Docker Images] -->|create frontend image|> E[Frontend Image]
-    A[Create Docker Images] -->|create backend image|> F[Backend Image]
+    A -->|create frontend image| E[Frontend Image]
+    A -->|create backend image| F[Backend Image]
 
-    E -->|push to registry|> B[Push to Local Registry]
-    F -->|push to registry|> B[Push to Local Registry]
+    E -->|push to registry| B
+    F -->|push to registry| B
 
-    C -->|deploy|> G[Local Kubernetes Cluster]
-    G -->|run|> D[Moose Facts Application]
+    C -->|deploy| G[Local Kubernetes Cluster]
+    G -->|run| D
 ```
 
 ## Hardware
