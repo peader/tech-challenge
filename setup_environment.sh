@@ -15,5 +15,6 @@ ansible-playbook infrastructure/playbooks/prerequisites.yaml
 
 echo "Manual steps required:"
 echo "1. Copy the content of /etc/rancher/k3s/k3s.yaml"
-echo "2. Replace the <your-kube-config> string in the secrets/my-custom.secrets file with the copied content"
-echo "3. Restart the raspberry pi"
+echo "2. Create the secrets/my-custom.secrets file and include the line KUBECONFIG='<your-kube-config>'"
+echo "3. Replace the <your-kube-config> string in the secrets/my-custom.secrets file with the copied content"
+echo "4. Restart the raspberry pi"

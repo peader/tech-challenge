@@ -59,8 +59,12 @@ The host name of the system is control-node. (Used to connect to the cluster fro
 - It will fail the first time when trying to install the k3s software (this is because the cgroup settings need to be read at machine startup to take effect). Restart the host and run again.
 - Follow the manual instructions that are printed to the terminal.
     - 1. Copy the content of /etc/rancher/k3s/k3s.yaml
-    - 2. Replace the <your-kube-config> string in the secrets/my-custom.secrets file with the copied content
-    - 3. Restart the raspberry pi
+    - 2. Create the secrets/my-custom.secretswith the following content:
+    ``` txt
+    KUBECONFIG='<your-kube-config>'
+    ```
+    - 3. Replace the <your-kube-config> string in the secrets/my-custom.secrets file with the copied content
+    - 4. Restart the raspberry pi
 - Run the command:
     ``` bash
     act --job docker --secret-file=secrets/my-custom.secrets
