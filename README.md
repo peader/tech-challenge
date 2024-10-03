@@ -65,11 +65,17 @@ The host name of the system is control-node. (Used to connect to the cluster fro
     ``` bash
     act --job docker --secret-file=secrets/my-custom.secrets
     ```
+- Open the host file on your system (on windows this is located at C:\Windows\System32\drivers\etc\hosts) and add the following to the file (The ip of the host running the ingress is static and just happens to be our pi host):
+```
+<ip-of-your-raspberry-pi>	   dev.moosefacts.com
+<ip-of-your-raspberry-pi>	   stg.moosefacts.com
+<ip-of-your-raspberry-pi>	   prod.moosefacts.com
+```
 - Run the command:
     ``` bash
     act --job deployment-dev --secret-file=secrets/my-custom.secrets
     ```
-- Open a browser and navigate to http://control-node:30008. You should see the moose facts website.
+- Open a browser and navigate to dev.moosefacts.com. You should see the moose facts website.
 - Deploy the staging and production environment with the following commands:
     ``` bash
     act --job deployment-stg --secret-file=secrets/my-custom.secrets
@@ -78,9 +84,9 @@ The host name of the system is control-node. (Used to connect to the cluster fro
 - Navigate to http://control-node:3001 (this is our kuma uptime monitoring service).
 - Input your new credentials and login.
 - Add three new dashboards. One for dev, stg and production with the urls:
-    - http://control-node:30008
-    - http://control-node:30009
-    - http://control-node:30010
+    - dev.moosefacts.com
+    - stg.moosefacts.com
+    - prod.moosefacts.com
 
 ## Making changes
 - Simply change either the application/backend/server.py file, for example add a new endpoint or modify an existing endpoint, or modify the html file at application/frontend/index.html.
@@ -90,7 +96,7 @@ The host name of the system is control-node. (Used to connect to the cluster fro
     act --job docker --secret-file=secrets/my-custom.secrets
     act --job deployment-dev --secret-file=secrets/my-custom.secrets
     ```
-You should see the changes reflected in the moose facts website at url http://control-node:30008
+You should see the changes reflected in the moose facts website at url dev.moosefacts.com
 
 ## Troubleshooting
 - If the site is not acting as expected run the command
