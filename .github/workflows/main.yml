@@ -36,6 +36,13 @@ jobs:
           tags: localhost:8000/moose-facts-backend:${{ env.sha_short }}
           context: application/backend
 
+      - name: Build and push backend to local registry
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          tags: localhost:8000/moose-facts-backend-netcore:${{ env.sha_short }}
+          context: application/backendnetcore
+
       - name: Build and push frontend local registry
         uses: docker/build-push-action@v6
         with:
