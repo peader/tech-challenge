@@ -1,3 +1,5 @@
+using System.Text.Json;
+
 List<string> mooseFacts = new List<string>
 {
     "Moose are the largest members of the deer family.",
@@ -35,7 +37,8 @@ string GetRandomMooseFact()
     var rand = new Random();
     var index = rand.Next(0, mooseFacts.Count);
     var fact = mooseFacts[index];
-    return fact;
+    var returnValue = new List<string>(){fact};
+    return JsonSerializer.Serialize(returnValue);
 }
 
 string GetImageVersion(){
