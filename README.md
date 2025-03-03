@@ -4,6 +4,8 @@ This repo attempts to setup a kubernetes cluster, deploy an application comprise
 
 Everything runs locally on the host machine.
 
+Test commit
+
 ## Architecture
 ### Dataflow
 ``` mermaid
