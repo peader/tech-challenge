@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: moosefacts-ingress-{{ .Values.environment }}
+
+spec:
+  rules:
+    - host: {{ .Values.environment }}.moosefacts.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name:  frontend-{{ .Values.environment }}
+                port:
+                  number: 80
